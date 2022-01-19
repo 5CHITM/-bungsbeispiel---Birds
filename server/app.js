@@ -3,6 +3,9 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const path = require('path');
 const cors = require('cors');
+const birdsRoutes = require('./routes/birds.js');
+
+const { notFound, errorHandler } = require('./middleware/errorHandler');
 
 require('colors');
 require('dotenv').config();
@@ -18,6 +21,11 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, '/public')));
 
 app.use(express.json());
+
+app.use('/', birdsRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 app.get('/test', (req, res) => res.send('Yeah, you reached the test route!'));
 
