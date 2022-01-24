@@ -14,8 +14,13 @@ const getBirds = (id) => {
 };
 
 const updateBird = (id, body) => {
-  const { bird } = body;
+  const { bird, observedBy } = body;
+
   bird['count'] += 1;
+  bird['observer'].push(observedBy);
+
+  console.log('observed bird:', bird);
+  console.log('observed by: ', observedBy);
 
   const foundIndex = birds.findIndex((el) => el.id == id);
   birds[foundIndex] = bird;

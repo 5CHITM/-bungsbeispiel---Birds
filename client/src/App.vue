@@ -31,13 +31,13 @@ export default {
     this.fetchData();
   },
   methods: {
-    async seenBird(bird) {
+    async seenBird(birdObj) {
       try {
         await axios({
-          url: `${process.env.VUE_APP_SERVER}/bird/${bird.id}`,
+          url: `${process.env.VUE_APP_SERVER}/bird/${birdObj.bird.id}`,
           method: 'patch',
           contentType: 'application/json',
-          data: { bird },
+          data: { birdObj },
         });
         this.fetchData();
       } catch (error) {

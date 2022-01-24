@@ -1,5 +1,10 @@
 <template>
-  <div></div>
+  <div>
+    <v-alert color="red darken-2 white--text text-center">
+      Last watched:
+      <span class="font-italic">{{ lastSeen.commonName }}</span>
+    </v-alert>
+  </div>
 </template>
 
 <script>
@@ -8,7 +13,11 @@ export default {
   data() {
     return {};
   },
-  props: {},
+  props: {
+    lastSeen: {
+      type: Object,
+    },
+  },
   methods: {},
 };
 </script>

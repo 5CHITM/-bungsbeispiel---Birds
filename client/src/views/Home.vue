@@ -1,11 +1,15 @@
 <template>
   <div>
     <h4>Our Endangered Birds</h4>
-    <div >
-      <v-text-field v-model="firstname" label="Firstname"></v-text-field>
-      <v-text-field v-model="lastname" label="Lastname"></v-text-field>
-      <p class="text-caption">Click on the <span class="red--text">eye</span> icon if you have observed that bird!</p>
-    </div>
+    <v-row no-gutters>
+      <v-col class="mr-2">
+        <v-text-field v-model="firstname" label="Firstname"></v-text-field>
+        <v-text-field v-model="lastname" label="Lastname"></v-text-field>
+        <p class="text-caption">Click on the <span class="red--text">eye</span> icon if you have observed that bird!</p>
+      </v-col>
+      <v-col class="ml-2"> <WatchedBirdname v-if="lastSeen" :lastSeen="lastSeen"></WatchedBirdname> </v-col>
+      <v-col></v-col>
+    </v-row>
     <v-data-table :headers="headers" :items="birds" :items-per-page="5" class="elevation-1">
       <template v-slot:item.pic="{ item }">
         <v-img max-width="100" :src="item.pic"></v-img>
@@ -21,6 +25,7 @@
 </template>
 
 <script>
+import WatchedBirdname from '@/components/WatchedBirdname.vue';
 export default {
   name: 'Home',
   data() {
@@ -35,7 +40,11 @@ export default {
       ],
       firstname: 'Sebastian',
       lastname: 'Lang',
+      lastSeen: '',
     };
+  },
+  components: {
+    WatchedBirdname,
   },
   props: {
     birds: {
@@ -44,7 +53,9 @@ export default {
   },
   methods: {
     seenBird(bird) {
-      return this.$emit('seen', bird);
+      this.lastSeen = bird;
+
+      return this.$emit('seen', { bird, observedBy: `${this.firstname} ${this.lastname}` });
     },
   },
 };

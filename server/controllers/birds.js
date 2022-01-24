@@ -7,7 +7,7 @@ const getBirds = (req, res) => {
 };
 
 const updateBird = (req, res) => {
-  const birds = model.updateBird(req.params.id, req.body);
+  const birds = model.updateBird(req.params.id, req.body.birdObj);
   res.status(200).json(birds);
 };
 
