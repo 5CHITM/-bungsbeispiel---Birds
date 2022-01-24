@@ -14,18 +14,50 @@
       <v-btn color="indigo" class="mx-1" active-class="active" to="/about"> About </v-btn>
     </v-app-bar>
     <v-main>
-      <v-container> <router-view /></v-container>
+      <v-container> <router-view :birds="birds" @seen="seenBird" /></v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'App',
 
   data: () => ({
-    //
+    birds: [],
   }),
+  created() {
+    this.fetchData();
+  },
+  methods: {
+    async seenBird(bird) {
+      try {
+        await axios({
+          url: `${process.env.VUE_APP_SERVER}/bird/${bird.id}`,
+          method: 'patch',
+          contentType: 'application/json',
+          data: { bird },
+        });
+        this.fetchData();
+      } catch (error) {
+        console.error(error);
+      }
+
+      return null;
+    },
+    async fetchData() {
+      try {
+        const { data } = await axios({
+          url: `${process.env.VUE_APP_SERVER}/birds`,
+          method: 'GET',
+        });
+        this.birds = data;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
 };
 </script>
 

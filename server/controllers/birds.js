@@ -6,4 +6,9 @@ const getBirds = (req, res) => {
   res.status(200).json(birds);
 };
 
-module.exports = { getBirds };
+const updateBird = (req, res) => {
+  const birds = model.updateBird(req.params.id, req.body);
+  res.status(200).json(birds);
+};
+
+module.exports = { getBirds, updateBird };
