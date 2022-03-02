@@ -29,6 +29,8 @@ app.use(errorHandler);
 
 app.get('/test', (req, res) => res.send('Yeah, you reached the test route!'));
 
-const PORT = process.env.PORT ?? 5000;
+// const PORT = process.env.PORT ?? 5000;
 
-app.listen(PORT);
+// app.listen(PORT);
+
+module.exports = app;

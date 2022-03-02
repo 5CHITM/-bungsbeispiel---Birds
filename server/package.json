@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
-    "lint": "eslint . --ext .js"
+    "lint": "eslint . --ext .js",
+    "test": "jest"
   },
   "author": "RB",
   "license": "ISC",
@@ -23,6 +24,8 @@
     "eslint": "^7.26.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "nodemon": "^2.0.7"
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.7",
+    "supertest": "^6.2.2"
   }
 }
