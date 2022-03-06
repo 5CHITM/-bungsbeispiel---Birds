@@ -9,6 +9,7 @@ describe('test people REST Service', () => {
     const res = await request.get('/birds');
     expect(res.status).toBe(200);
     expect(res).toHaveProperty('body');
-    expect(res.body[2]).toEqual(expect.objectContaining({ commonName: 'Swift Parrot' }));
+    // expect(res.body[2]).toEqual(expect.objectContaining({ commonName: 'Swift Parrot' }));
+    expect(res.body).toEqual(expect.arrayContaining([expect.objectContaining({ commonName: 'Swift Parrot' })]));
   });
 });
